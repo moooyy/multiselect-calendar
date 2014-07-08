@@ -1,7 +1,7 @@
 multiselect-calendar
 =====================
 ### demo
-[http://moooyy.github.io/multiselect-calendar]
+http://moooyy.github.io/multiselect-calendar
 
 ### 产生
 基于已有项目已经使用了jqueryui框架, 无法满足现有需求
@@ -16,6 +16,3 @@ $("#datepicker").data("multidate",["2014-08-01", "2014-08-03"]);
 ```javascript
 $("#datepicker").data("multidate");
 ```
-
-
-[http://moooyy.github.io/multiselect-calendar] : http://moooyy.github.io/multiselect-calendar
