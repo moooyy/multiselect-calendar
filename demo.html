@@ -37,7 +37,7 @@
         beforeShowDay : function (a) {
             var selectDate = $("#datepicker").data("multidate") || [];
             for(var i = 0, il = selectDate.length; i < il; i++) {
-                if(+new Date(selectDate[i] + " 00:00:00") == +a){
+                if(new Date(selectDate[i]).setHours(0) == +a){
                     return [true,"ui-datepicker-multiselect"]        
                 }
             }
