@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>基于jqueryui的日历多选控件</title>
+    <link href="./jqueryui/jquery-ui-1.10.3.custom.min.css" type="text/css" rel="stylesheet" />
+</head>
+<body role="document">
+    <div id="datepicker" class="datepicker"></div>
+    <h3>已选日期:</h3>
+    <div id="result"></div>
+               
+<!-- 公共库 -->
+<script type="text/javascript" src="./jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="./jqueryui/jquery-ui-1.10.3.custom.min.js"></script>
+
+<script type="text/javascript">
+    $("#datepicker").data("multidate",["2014-08-01", "2014-08-03", "2014-08-05", "2014-08-07", "2014-08-09", "2014-08-11", "2014-08-13", "2014-08-15", "2014-08-17", "2014-08-19", "2014-08-21", "2014-08-23", "2014-08-25", "2014-08-27", "2014-08-29", "2014-08-31"]);
+    $("#datepicker").datepicker({
+        numberOfMonths : 3,
+        stepMonths: 3,
+        dateFormat: "yy-mm-dd",
+        onSelect: function (date, picker){
+            var selectDate = $("#datepicker").data("multidate") || [];
+            for(var i = 0, il = selectDate.length; i < il; i++) {
+                if(selectDate[i] == date){
+                    selectDate.splice(i,1);
+                    $("#result").html(selectDate.join("<br/>"));
+                    $("#datepicker").data("multidate", selectDate);
+                    return false;
+                }
+            }
+            selectDate.push(date);
+            $("#result").html(selectDate.join("<br/>"));
+            $("#datepicker").data("multidate", selectDate);
+        },
+        beforeShowDay : function (a) {
+            var selectDate = $("#datepicker").data("multidate") || [];
+            for(var i = 0, il = selectDate.length; i < il; i++) {
+                if(+new Date(selectDate[i] + " 00:00:00") == +a){
+                    return [true,"ui-datepicker-multiselect"]        
+                }
+            }
+            return [true,"ui-datepicker-unselect"];
+        }
+    });
+    function refresh () {
+        $("#datepicker").datepicker("refresh");
+        $("#result").html($("#datepicker").data("multidate").join("<br/>"));
+    };
+    refresh();
+</script>
+</body>
+</html>
